@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Galería – IDJ Casa de Refugio</title>
+
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f9f9f9;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    nav {
+      background: #362062;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 5px 30px;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 10;
+    }
+
+    nav img { height: 90px; }
+
+    .dropdown { position: relative; }
+
+    .dropbtn {
+      background-color: #362062;
+      color: white;
+      padding: 18px 28px;
+      font-size: 18px;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      border-radius: 8px;
+    }
+
+    .dropdown-content {
+      display: none;
+      position: absolute;
+      right: 0;
+      background-color: #362062;
+      min-width: 240px;
+      box-shadow: 0px 8px 16px rgba(0,0,0,0.2);
+      z-index: 1000;
+      border-radius: 5px;
+      flex-direction: column;
+      opacity: 0;
+      transform: translateY(-10px);
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+
+    .dropdown-content.show {
+      display: flex;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .dropdown-content a,
+    .dropdown-content .lang-btn {
+      color: white;
+      padding: 14px 20px;
+      text-decoration: none;
+      display: block;
+      background: none;
+      text-align: left;
+      border: none;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .dropdown-content a:hover,
+    .dropdown-content .lang-btn:hover {
+      background-color: #4A2D81;
+    }
+
+    header {
+      background: url('https://i.postimg.cc/JhPBMXVL/IMG-2586.jpg') center center / cover no-repeat;
+      color: white;
+      text-align: center;
+      padding: 60px 20px;
+      position: relative;
+    }
+
+    header::before {
+      content: "";
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 0;
+    }
+
+    header h1, header p {
+      position: relative;
+      z-index: 1;
+    }
+
+    .section {
+      max-width: 1200px;
+      margin: auto;
+      padding: 40px 20px;
+      text-align: center;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: auto;
+      border-radius: 8px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      transition: transform 0.3s ease;
+      cursor: pointer;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.03);
+    }
+
+    footer {
+      background: #4A2D81;
+      color: white;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+      font-size: 14px;
+    }
+
+    footer a { color: white; text-decoration: underline; }
+
+    .social-icons img {
+      filter: invert(1);
+      margin: 0 8px;
+      width: 24px;
+      height: 24px;
+      vertical-align: middle;
+    }
+
+    .live-btn {
+      background-color: #e03e3e;
+      color: white;
+      padding: 12px 20px;
+      font-size: 16px;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      text-decoration: none;
+      cursor: pointer;
+      margin-left: 20px;
+      transition: background-color 0.3s ease;
+    }
+
+    .live-btn:hover {
+      background-color: #b82b2b;
+    }
+
+    /* Responsive */
+
+    @media (max-width: 768px) {
+      nav {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px 15px;
+      }
+
+      nav img {
+        margin-bottom: 10px;
+      }
+
+      .dropbtn {
+        font-size: 16px;
+        padding: 14px 20px;
+      }
+
+      .dropdown-content a, .dropdown-content .lang-btn {
+        font-size: 14px;
+        padding: 12px 16px;
+      }
+
+      header {
+        padding: 40px 10px;
+      }
+
+      header h1 {
+        font-size: 28px;
+      }
+
+      header p {
+        font-size: 16px;
+      }
+
+      .section {
+        padding: 30px 10px;
+      }
+
+      .gallery {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 12px;
+      }
+
+      .live-btn {
+        padding: 10px 14px;
+        font-size: 14px;
+        margin-left: 10px;
+      }
+
+      .dropdown-content {
+        min-width: 100%;
+        border-radius: 0;
+        position: relative;
+      }
+    }
+
+    @media (max-width: 400px) {
+      header h1 {
+        font-size: 22px;
+      }
+
+      .live-btn {
+        font-size: 12px;
+        padding: 8px 10px;
+      }
+
+      .dropbtn {
+        font-size: 14px;
+        padding: 12px 16px;
+      }
+
+      .dropdown-content a, .dropdown-content .lang-btn {
+        font-size: 14px;
+        padding: 10px 14px;
+      }
+
+      .gallery {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      footer {
+        font-size: 12px;
+      }
+    }
+  </style>
+
+  <script>
+    function toggleLanguage(event) {
+      event?.stopPropagation();
+      const isSpanish = document.documentElement.lang === "es";
+      document.documentElement.lang = isSpanish ? "en" : "es";
+
+      document.getElementById('nav-welcome').textContent = isSpanish ? "Welcome" : "Bienvenida";
+      document.getElementById('nav-pastor').textContent = "Pastor";
+      document.getElementById('nav-contact').textContent = isSpanish ? "Information" : "Información";
+      document.getElementById('nav-gallery').textContent = isSpanish ? "Gallery" : "Galería";
+      document.querySelector('.lang-btn').textContent = isSpanish ? "Español" : "English";
+      document.getElementById('slogan').textContent = isSpanish ? 'Live Streaming' : 'Sintonia en VIVO';
+      document.getElementById('video-info').textContent = isSpanish
+        ? "Watch our latest videos or tune in live."
+        : "Mira nuestros últimos videos o sintoniza en vivo.";
+    }
+
+    function toggleDropdown() {
+      document.getElementById("menuDropdown").classList.toggle("show");
+    }
+
+    window.onclick = function(event) {
+      if (!event.target.matches('.dropbtn') && !event.target.matches('.lang-btn')) {
+        const dropdowns = document.getElementsByClassName("dropdown-content");
+        for (let i = 0; i < dropdowns.length; i++) {
+          dropdowns[i].classList.remove('show');
+        }
+      }
+    };
+
+    window.onload = () => toggleLanguage();
+  </script>
+</head>
+
+<body>
+
+  <nav>
+    <img src="https://i.postimg.cc/43KB5mDX/idjcdr-logo-transparency-white.png" alt="IDJ Logo">
+    <div style="display: flex; align-items: center;">
+      <a href="live.html" class="live-btn">LIVE</a>
+      <div class="dropdown">
+        <button class="dropbtn" onclick="toggleDropdown()">☰ Menu</button>
+        <div class="dropdown-content" id="menuDropdown">
+          <a href="ndex.html" id="nav-welcome">Bienvenida</a>
+          <a href="pastor.html" id="nav-pastor">Pastor</a>
+          <a href="contacto.html" id="nav-contact">Información</a>
+          <a href="gallery.html" id="nav-gallery">Galería</a>
+          <button class="lang-btn" onclick="toggleLanguage(event)">English</button>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <header>
+    <h1>IDJ Casa de Refugio</h1>
+    <p id="slogan">Sintonia en VIVO</p>
+  </header>
+
+  <section class="section">
+    <iframe
+      src="https://www.youtube.com/embed?list=UUlUBz1tu129dEJY55EWU9bg"
+      title="IDJ Casa de Refugio - Videos Recientes"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen>
+    </iframe>
+    <p id="video-info" style="margin-top: 20px;">Mira nuestros últimos videos o sintoniza en vivo.</p>
+  </section>
+
+  <footer>
+    <p>© 2024 IDJ Casa de Refugio |
+      <a href="inc.html">Privacy Policy</a>
+    </p>
+    <div class="social-icons">
+      <a href="https://www.facebook.com/profile.php?id=61554815210025" target="_blank">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/facebook.svg" alt="Facebook">
+      </a>
+      <a href="https://www.instagram.com/idj.casaderefugio" target="_blank">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/instagram.svg" alt="Instagram">
+      </a>
+      <a href="https://youtube.com/@idjcasaderefugio" target="_blank">
+        <img src="https://cdn.jsdelivr.net/gh/simple-icons/simple-icons/icons/youtube.svg" alt="YouTube">
+      </a>
+    </div>
+  </footer>
+
+</body>
+</html>
